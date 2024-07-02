@@ -20,6 +20,11 @@ const fetchData = async () => {
   }
 };
 
+// Log the fetched data to the console
+fetchData().then((tickers) => {
+  console.log(tickers);
+});
+
 const updateTicker = (ticker) => {
   const sql = `
     INSERT INTO tickers (name, last, buy, sell, volume, base_unit)

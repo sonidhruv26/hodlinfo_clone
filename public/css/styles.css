@@ -21,8 +21,9 @@ body {
   gap: 10px;
 }
 
-.options select, .options a {
-  padding: 10px; 
+.options select,
+.options a {
+  padding: 10px;
   font-size: 16px;
   border-radius: 5px;
   background-color: #2e3241;
@@ -36,11 +37,13 @@ body {
   text-decoration: none;
 }
 
-.options select:hover, .options a:hover {
+.options select:hover,
+.options a:hover {
   background-color: #3f4558;
 }
 
-.options select:focus, .options a:focus {
+.options select:focus,
+.options a:focus {
   outline: none;
 }
 
@@ -82,13 +85,6 @@ body {
 
 /* Dark/light mode toggle */
 
-/*
-  <label class="switch">
-            <input type="checkbox" id="themeToggle" />
-            <span class="slider round"></span>
-          </label>
-*/
-
 .switch {
   position: relative;
   display: inline-block;
@@ -123,21 +119,21 @@ body {
   width: 26px;
   left: 4px;
   bottom: 4px;
-  border-radius: 50%; 
+  border-radius: 50%;
   background-color: #5dc7c2;
   -webkit-transition: 0.4s;
   transition: 0.4s;
 }
 
-input:checked + .slider {
+input:checked+.slider {
   background-color: white;
 }
 
-input:focus + .slider {
+input:focus+.slider {
   box-shadow: 0 0 1px #2196F3;
 }
 
-input:checked + .slider:before {
+input:checked+.slider:before {
   -webkit-transform: translateX(26px);
   -ms-transform: translateX(26px);
   transform: translateX(26px);
@@ -146,7 +142,7 @@ input:checked + .slider:before {
 /* Figures */
 
 .figures h1 {
-  font-size: 80px;
+  font-size: 4em;
   font-weight: normal;
   margin-bottom: 10px;
 }
@@ -171,10 +167,12 @@ input:checked + .slider:before {
 }
 
 .figures-details {
-  display: flex;
-  justify-content: space-around;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   align-items: center;
-  margin-top: 20px;
+  grid-auto-rows: minmax(20px, auto);
+  /* gap: 10px; */
+  /* margin-top: 20px; */
 }
 
 .table thead th {
@@ -182,11 +180,222 @@ input:checked + .slider:before {
   background-color: transparent;
 }
 
-.table tbody tr,td {
-  margin-top: 10px ;
+.table tbody tr,
+td {
+  margin-top: 10px;
 }
 
 .table tbody td {
   font-size: 26px;
   background-color: #2e3241;
+}
+
+/* For tablets and smaller devices */
+@media (max-width: 992px) {
+  .heading {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .options {
+    width: 100% !important;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+  }
+
+  .options select,
+  .options a {
+    width: 100% !important;
+    font-size: 14px !important;
+  }
+
+  .tools {
+    /* flex-direction: column;
+    align-items: flex-start;
+    gap: 5px; */
+    margin-top: 10px;
+  }
+
+  .tools .countdown-timer {
+    width: 40px;
+    height: 40px;
+    font-size: 16px;
+  }
+
+  .figures h1 {
+    font-size: 3em;
+  }
+
+  .figures h2 {
+    font-size: 25px;
+  }
+
+  .figures h3 {
+    font-size: 28px;
+  }
+
+  .figures p {
+    font-size: 16px;
+  }
+
+  .figures-details {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  }
+
+  .table thead th,
+  .table tbody td {
+    white-space: nowrap;
+  }
+
+  .table thead th {
+    font-size: 20px;
+  }
+
+  .table tbody td {
+    font-size: 22px;
+  }
+}
+
+/* For mobile devices */
+@media (max-width: 768px) {
+  .heading {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .options {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+    width: 100% !important;
+  }
+
+  .options select,
+  .options a {
+    width: 100% !important;
+    font-size: 12px !important;
+  }
+
+  .tools {
+    /* flex-direction: column;
+    align-items: flex-start;
+    gap: 5px; */
+    margin-top: 10px;
+  }
+
+  .tools .countdown-timer {
+    width: 30px;
+    height: 30px;
+    font-size: 14px;
+  }
+
+  .figures h1 {
+    font-size: 2em;
+  }
+
+  .figures h2 {
+    font-size: 20px;
+  }
+
+  .figures h3 {
+    font-size: 24px;
+  }
+
+  .figures p {
+    font-size: 14px;
+  }
+
+  .figures-details {
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  }
+
+  .figures-details .main {
+    grid-column: span 2;
+  }
+
+  .table thead th,
+  .table tbody td {
+    white-space: nowrap;
+  }
+
+  .table thead th {
+    font-size: 18px;
+  }
+
+  .table tbody td {
+    font-size: 20px;
+  }
+}
+
+/* For very small devices */
+@media (max-width: 576px) {
+  .heading {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .options {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+    width: 100% !important;
+  }
+
+  .options select,
+  .options a {
+    width: 100% !important;
+    font-size: 10px !important;
+  }
+
+  .tools {
+    /* flex-direction: column;
+    align-items: flex-start;
+    gap: 5px; */
+    margin-top: 10px;
+  }
+
+  .tools .countdown-timer {
+    width: 20px;
+    height: 20px;
+    font-size: 12px;
+  }
+
+  .figures h1 {
+    font-size: 1.5em;
+  }
+
+  .figures h2 {
+    font-size: 18px;
+  }
+
+  .figures h3 {
+    font-size: 20px;
+  }
+
+  .figures p {
+    font-size: 12px;
+  }
+
+  .figures-details {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-auto-rows: minmax(20px, auto);
+  }
+
+  .figures-details .main {
+    grid-column: auto;
+  }
+
+  .table thead th,
+  .table tbody td {
+    white-space: nowrap;
+  }
+
+  .table thead th {
+    font-size: 16px;
+  }
+
+  .table tbody td {
+    font-size: 18px;
+  }
 }

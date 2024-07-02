@@ -12,7 +12,7 @@
 
 <body>
   <div class="container-fluid">
-    <div class="heading d-flex justify-content-between align-items-center px-2 my-4">
+    <div class="heading d-flex flex-wrap justify-content-between align-items-center px-2 my-4">
       <!-- Hodlinfo logo -->
       <img src="/assets/HODLINFO.8f78fc06.png" alt="Hodlinfo" height="45px" />
       <!-- Options to select currency and crypto -->
@@ -49,71 +49,76 @@
     </div>
     <div class="figures">
       <h2 class="text-center text-secondary mb-2">Best Price to Trade</h2>
-
       <div class="figures-details">
         <div class="detail">
+          <h2></h2>
           <h3 class="text-center"><%= figures.priceFiveMins %> %</h3>
           <p class="text-center text-secondary">5 mins</p>
         </div>
         <div class="detail">
+          <h2></h2>
           <h3 class="text-center"><%= figures.priceOneHour %> %</h3>
           <p class="text-center text-secondary">1 hour</p>
         </div>
         <div class="detail main">
-          <h1 class="text-center">₹ <%= figures.averagePrice %></h1>
+          <h1 class="text-center">₹<%= figures.averagePrice %></h1>
           <p class="text-center text-secondary">
             Average BTC/INR net price including commission
           </p>
         </div>
         <div class="detail">
+          <h2></h2>
           <h3 class="text-center"><%= figures.priceOneDay %> %</h3>
           <p class="text-center text-secondary">1 day</p>
         </div>
         <div class="detail">
+          <h2></h2>
           <h3 class="text-center"><%= figures.priceSevenDays %> %</h3>
           <p class="text-center text-secondary">7 days</p>
         </div>
       </div>
     </div>
-    <table class="table table-dark mt-5">
-      <thead>
-        <tr>
-          <th class="text-secondary">#</th>
-          <th class="text-secondary">Base Unit</th>
-          <th class="text-secondary">Last Traded Price</th>
-          <th class="text-secondary">Buy Price</th>
-          <th class="text-secondary">Sell Price</th>
-          <th class="text-secondary">Difference</th>
-          <th class="text-secondary">Savings</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% tickers.forEach((ticker, index) => { %>
-        <tr>
-          <td><%= index + 1 %></td>
-          <td><%= ticker.name %></td>
-          <td>₹ <%= ticker.last %></td>
-          <td>₹ <%= ticker.buy %></td>
-          <td>₹ <%= ticker.sell %></td>
-          <!-- If difference in NaN -->
-          <% if (isNaN(ticker.difference)) { %>
-          <td style="color: #5dc7c2;">0 %</td>
-          <% } else if (ticker.difference < 0) { %>
-          <td class="text-danger"><%= ticker.difference %> %</td>
-          <% } else { %>
-          <td style="color: #5dc7c2;">+<%= ticker.difference %> %</td>
-          <% } %>
-          <% if (ticker.savings < 0) { %>
-          <td class="text-danger">₹ <%= ticker.savings %></td>
-          <% } else if (ticker.savings === 0) { %>
-          <td style="color: #5dc7c2;">₹ <%= ticker.savings %></td>
-          <% } else { %>
-          <td style="color: #5dc7c2;">+₹ <%= ticker.savings %></td>
-          <% } %>
-        </tr>
-        <% }) %>
-      </tbody>
-    </table>
+    <div class="table-responsive">
+      <table class="table table-dark mt-5">
+        <thead>
+          <tr>
+            <th class="text-secondary">#</th>
+            <th class="text-secondary">Base Unit</th>
+            <th class="text-secondary">Last Traded Price</th>
+            <th class="text-secondary">Buy Price</th>
+            <th class="text-secondary">Sell Price</th>
+            <th class="text-secondary">Difference</th>
+            <th class="text-secondary">Savings</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% tickers.forEach((ticker, index) => { %>
+          <tr>
+            <td><%= index + 1 %></td>
+            <td><%= ticker.name %></td>
+            <td>₹ <%= ticker.last %></td>
+            <td>₹ <%= ticker.buy %></td>
+            <td>₹ <%= ticker.sell %></td>
+            <!-- If difference in NaN -->
+            <% if (isNaN(ticker.difference)) { %>
+            <td style="color: #5dc7c2;">0 %</td>
+            <% } else if (ticker.difference < 0) { %>
+            <td class="text-danger"><%= ticker.difference %> %</td>
+            <% } else { %>
+            <td style="color: #5dc7c2;">+<%= ticker.difference %> %</td>
+            <% } %>
+            <% if (ticker.savings < 0) { %>
+            <td class="text-danger">₹ <%= ticker.savings %></td>
+            <% } else if (ticker.savings === 0) { %>
+            <td style="color: #5dc7c2;">₹ <%= ticker.savings %></td>
+            <% } else { %>
+            <td style="color: #5dc7c2;">+₹ <%= ticker.savings %></td>
+            <% } %>
+          </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
   </div>
 
   <!-- Alert that notifies data is updated -->
