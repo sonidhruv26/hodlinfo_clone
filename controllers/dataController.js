@@ -4,7 +4,7 @@ const { updateTicker, updatePriceDiff } = require("../models/tickerModel");
 
 const fetchData = async () => {
   try {
-    const response = await axios.get("https://api.wazirx.com/api/v2/tickers");
+    const response = await axios.get("https://api.wazirx.com/api/v2/tickers", {timeout: 10000}); // 10 seconds timeout
     return Object.values(response.data)
       .slice(0, 10)
       .map((ticker) => ({
@@ -34,7 +34,7 @@ const updatePriceDifferences = () => {
   });
 };
 
-setInterval(updateDatabase, 30000);
+setInterval(updateDatabase, 60000);
 setInterval(() => updatePriceDiff("5Min"), 300000);
 setInterval(() => updatePriceDiff("1Hr"), 3600000);
 setInterval(() => updatePriceDiff("1Day"), 86400000);
