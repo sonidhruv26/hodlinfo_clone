@@ -105,6 +105,8 @@
           <% } %>
           <% if (ticker.savings < 0) { %>
           <td class="text-danger">₹ <%= ticker.savings %></td>
+          <% } else if (ticker.savings === 0) { %>
+          <td style="color: #5dc7c2;">₹ <%= ticker.savings %></td>
           <% } else { %>
           <td style="color: #5dc7c2;">+₹ <%= ticker.savings %></td>
           <% } %>
