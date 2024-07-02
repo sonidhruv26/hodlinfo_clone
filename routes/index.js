@@ -1,36 +1,20 @@
 const express = require("express");
 const router = express.Router();
 const db = require("../config/db");
-const { fetchData } = require("../controllers/dataController");
-
-const getAveragePrice = (baseUnit) => {
-  return new Promise((resolve, reject) => {
-    const sql = `SELECT AVG(last) as averagePrice FROM tickers WHERE base_unit = ?`;
-    db.query(sql, [baseUnit], (err, result) => {
-      if (err) reject(err);
-      resolve(result[0]);
-    });
-  });
-};
-
-const getPriceDiff = (baseUnit, time) => {
-  return new Promise((resolve, reject) => {
-    const sql = `SELECT AVG(priceDiff${time}) as priceDiff FROM tickers WHERE base_unit = ?`;
-    db.query(sql, [baseUnit], (err, result) => {
-      if (err) reject(err);
-      resolve(result[0]);
-    });
-  });
-};
+const { getAveragePrice, getPriceDiff } = require("../models/tickerModel");
 
 router.get("/", async (req, res) => {
-  const currency = req.query.currency?.toLowerCase() || "inr";
-  const crypto = req.query.crypto?.toLowerCase() || "btc";
+  const currency = (req.query.currency || "inr").toLowerCase();
+  const crypto = (req.query.crypto || "btc").toLowerCase();
 
   try {
-    const sql = `SELECT * FROM tickers`;
+    const sql = "SELECT * FROM tickers";
     db.query(sql, async (err, result) => {
-      if (err) throw err;
+      if (err) {
+        console.error("Error fetching tickers:", err.message);
+        return res.status(500).send("Internal Server Error");
+      }
+
       const data = result.map((ticker) => ({
         name: ticker.name,
         last: ticker.last,
@@ -46,7 +30,10 @@ router.get("/", async (req, res) => {
 
       const baseUnitTypesQry = "SELECT DISTINCT base_unit FROM tickers";
       db.query(baseUnitTypesQry, async (err, result) => {
-        if (err) throw err;
+        if (err) {
+          console.error("Error fetching base units:", err.message);
+          return res.status(500).send("Internal Server Error");
+        }
         const baseUnitTypes = result.map((row) => row.base_unit);
         const figures = {};
 
