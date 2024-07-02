@@ -5,6 +5,7 @@ require("dotenv").config();
 require("./controllers/dataController"); // This will start your intervals
 
 app.set("view engine", "ejs");
+app.set("views", path.join(__dirname, "views"));
 app.use(express.static(path.join(__dirname, "public")));
 
 const indexRouter = require("./routes/index");
